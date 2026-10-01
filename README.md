@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://career-readiness-youth.streamlit.app)
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://career-readiness-youth.streamlit.app)
 [![Pandas](https://img.shields.io/badge/Pandas-2.0+-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Altair](https://img.shields.io/badge/Altair-5.0+-4B8BBE?style=for-the-badge&logo=altair&logoColor=white)](https://altair-viz.github.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -13,7 +13,7 @@
 **Community Engagement Project (CEP) — Final Semester Data Science & Decision Intelligence Capstone**  
 *An explainable, deterministic multi-criteria decision tool designed to assess youth career aspirations, quantify competency readiness, identify prioritized skill gaps, and generate actionable 1-month and 3-month personalized learning roadmaps.*
 
-[🚀 Live Demo](#-247-free-cloud-deployment-guide) • [✨ Key Capabilities](#-key-capabilities) • [🏛️ System Architecture](#️-system-architecture) • [📐 Scoring Methodology](#-scoring-formula--mathematical-rationale) • [🚀 Quickstart](#-local-installation--quickstart)
+[🚀 Live Interactive App](https://career-readiness-youth.streamlit.app) • [✨ Key Capabilities](#-key-capabilities) • [🏛️ System Architecture](#️-system-architecture) • [📐 Scoring Methodology](#-scoring-formula--mathematical-rationale) • [🚀 Quickstart](#-local-installation--quickstart)
 
 </div>
 
