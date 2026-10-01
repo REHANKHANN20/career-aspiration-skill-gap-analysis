@@ -1,0 +1,330 @@
+{
+  "Banking / Finance": {
+    "total_weighted_points": 13,
+    "skills": [
+      {
+        "skill": "Microsoft Office/Excel",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Financial modeling, ledger reconciliation, and spreadsheet auditing"
+      },
+      {
+        "skill": "Data Analysis / Data Scientist",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Risk modeling, credit assessment, and portfolio analytics"
+      },
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Quantitative reasoning, liquidity balancing, and fraud anomaly detection"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Client wealth advising and regulatory reporting"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Adherence to daily trading windows and regulatory filing cycles"
+      }
+    ]
+  },
+  "Business / Entrepreneurship": {
+    "total_weighted_points": 17,
+    "skills": [
+      {
+        "skill": "Leadership",
+        "weight": 3,
+        "category": "Management",
+        "rationale": "Vision setting, team motivation, and resource orchestration for ventures"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Client negotiation, pitch presentations, and investor relations"
+      },
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Navigating market volatility and operational bottlenecks"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Prioritizing high-leverage commercial and operational initiatives"
+      },
+      {
+        "skill": "Teamwork",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Building and maintaining functional teams and strategic alliances"
+      },
+      {
+        "skill": "Microsoft Office/Excel",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "Financial modeling, budgeting, and commercial reporting"
+      },
+      {
+        "skill": "Creativity",
+        "weight": 2,
+        "category": "Cognitive",
+        "rationale": "Product differentiation and innovative go-to-market strategies"
+      }
+    ]
+  },
+  "Education / Teaching": {
+    "total_weighted_points": 15,
+    "skills": [
+      {
+        "skill": "Communication Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Curriculum delivery, pedagogical clarity, and student engagement"
+      },
+      {
+        "skill": "English Language Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Instructional delivery, academic writing, and scholarly publications"
+      },
+      {
+        "skill": "Presentation/Public Speaking",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Classroom instruction, conference addresses, and workshop dissemination"
+      },
+      {
+        "skill": "Creativity",
+        "weight": 2,
+        "category": "Cognitive",
+        "rationale": "Innovative teaching aids, lesson plans, and differentiated student learning"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Syllabus scheduling, examination grading, and session planning"
+      },
+      {
+        "skill": "Computer/Digital Skills",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "Learning Management Systems (LMS) and multimedia educational tools"
+      }
+    ]
+  },
+  "Engineering / Technical Fields": {
+    "total_weighted_points": 14,
+    "skills": [
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Root cause failure analysis and mathematical system modeling"
+      },
+      {
+        "skill": "Computer/Digital Skills",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "CAD/CAM, simulation software, digital testing apparatus"
+      },
+      {
+        "skill": "Programming/Coding",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "Automation scripts, embedded systems, and numerical computation"
+      },
+      {
+        "skill": "Teamwork",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Cross-disciplinary project delivery and safety compliance groups"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Technical specification authoring and project reporting"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Milestone delivery in capital-intensive physical engineering tasks"
+      }
+    ]
+  },
+  "Government Services / Civil Services": {
+    "total_weighted_points": 15,
+    "skills": [
+      {
+        "skill": "Communication Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Drafting policy notes, administrative communication, and citizen grievance redressal"
+      },
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Public policy evaluation and crisis administration"
+      },
+      {
+        "skill": "Leadership",
+        "weight": 3,
+        "category": "Management",
+        "rationale": "Departmental stewardship and law-and-order governance"
+      },
+      {
+        "skill": "English Language Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Formal bureaucratic reporting and interstate administrative alignment"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Managing statutory deadlines and public scheme implementation timelines"
+      },
+      {
+        "skill": "Teamwork",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Inter-departmental coordination and hierarchical civil administration"
+      }
+    ]
+  },
+  "Healthcare / Medical": {
+    "total_weighted_points": 13,
+    "skills": [
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Clinical diagnostic reasoning and emergency triage protocols"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Patient history elicitation, bedside empathy, and ethical consent"
+      },
+      {
+        "skill": "Teamwork",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Interdisciplinary surgical, nursing, and intensive care coordination"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Critical care response time and patient scheduling"
+      },
+      {
+        "skill": "English Language Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Pharmacological indexing and international clinical literature review"
+      }
+    ]
+  },
+  "Information Technology / Data Science / AI": {
+    "total_weighted_points": 17,
+    "skills": [
+      {
+        "skill": "Programming/Coding",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Essential prerequisite for software engineering, scripting, and model development"
+      },
+      {
+        "skill": "Data Analysis / Data Scientist",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Core capability for insight generation, data wrangling, and predictive modeling"
+      },
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Algorithmic thinking and troubleshooting complex systems"
+      },
+      {
+        "skill": "Artificial Intelligence / Machine Learning",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "High-value specialization for modern IT/data pipelines"
+      },
+      {
+        "skill": "Computer/Digital Skills",
+        "weight": 2,
+        "category": "Foundational",
+        "rationale": "Proficiency in operating systems, dev tools, git, cloud interfaces"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Cross-functional stakeholder translation and technical documentation"
+      },
+      {
+        "skill": "Time Management",
+        "weight": 1,
+        "category": "Professional",
+        "rationale": "Sprint delivery and project milestone adherence in agile environments"
+      },
+      {
+        "skill": "Teamwork",
+        "weight": 1,
+        "category": "Professional",
+        "rationale": "Collaborative version control and paired software engineering"
+      }
+    ]
+  },
+  "Research / Science": {
+    "total_weighted_points": 13,
+    "skills": [
+      {
+        "skill": "Problem-Solving",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Hypothesis formulation, experimental design, and empirical refutation"
+      },
+      {
+        "skill": "Data Analysis / Data Scientist",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Statistical significance testing, regression modeling, and data visualization"
+      },
+      {
+        "skill": "Communication Skills",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Peer-reviewed scientific manuscript writing and symposium defense"
+      },
+      {
+        "skill": "English Language Skills",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Scholarly reading, international grants, and publication drafting"
+      },
+      {
+        "skill": "Computer/Digital Skills",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "Scientific computing, laboratory instrumentation software, and LaTeX"
+      }
+    ]
+  }
+}

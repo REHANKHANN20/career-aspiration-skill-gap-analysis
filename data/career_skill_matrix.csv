@@ -1,0 +1,49 @@
+career,required_skill,weight,category,competency_rationale
+Information Technology / Data Science / AI,Programming/Coding,3,Technical,"Essential prerequisite for software engineering, scripting, and model development"
+Information Technology / Data Science / AI,Data Analysis / Data Scientist,3,Technical,"Core capability for insight generation, data wrangling, and predictive modeling"
+Information Technology / Data Science / AI,Problem-Solving,3,Cognitive,Algorithmic thinking and troubleshooting complex systems
+Information Technology / Data Science / AI,Artificial Intelligence / Machine Learning,2,Technical,High-value specialization for modern IT/data pipelines
+Information Technology / Data Science / AI,Computer/Digital Skills,2,Foundational,"Proficiency in operating systems, dev tools, git, cloud interfaces"
+Information Technology / Data Science / AI,Communication Skills,2,Professional,Cross-functional stakeholder translation and technical documentation
+Information Technology / Data Science / AI,Time Management,1,Professional,Sprint delivery and project milestone adherence in agile environments
+Information Technology / Data Science / AI,Teamwork,1,Professional,Collaborative version control and paired software engineering
+Business / Entrepreneurship,Leadership,3,Management,"Vision setting, team motivation, and resource orchestration for ventures"
+Business / Entrepreneurship,Communication Skills,3,Professional,"Client negotiation, pitch presentations, and investor relations"
+Business / Entrepreneurship,Problem-Solving,3,Cognitive,Navigating market volatility and operational bottlenecks
+Business / Entrepreneurship,Time Management,2,Professional,Prioritizing high-leverage commercial and operational initiatives
+Business / Entrepreneurship,Teamwork,2,Professional,Building and maintaining functional teams and strategic alliances
+Business / Entrepreneurship,Microsoft Office/Excel,2,Technical,"Financial modeling, budgeting, and commercial reporting"
+Business / Entrepreneurship,Creativity,2,Cognitive,Product differentiation and innovative go-to-market strategies
+Government Services / Civil Services,Communication Skills,3,Professional,"Drafting policy notes, administrative communication, and citizen grievance redressal"
+Government Services / Civil Services,Problem-Solving,3,Cognitive,Public policy evaluation and crisis administration
+Government Services / Civil Services,Leadership,3,Management,Departmental stewardship and law-and-order governance
+Government Services / Civil Services,English Language Skills,2,Professional,Formal bureaucratic reporting and interstate administrative alignment
+Government Services / Civil Services,Time Management,2,Professional,Managing statutory deadlines and public scheme implementation timelines
+Government Services / Civil Services,Teamwork,2,Professional,Inter-departmental coordination and hierarchical civil administration
+Engineering / Technical Fields,Problem-Solving,3,Cognitive,Root cause failure analysis and mathematical system modeling
+Engineering / Technical Fields,Computer/Digital Skills,3,Technical,"CAD/CAM, simulation software, digital testing apparatus"
+Engineering / Technical Fields,Programming/Coding,2,Technical,"Automation scripts, embedded systems, and numerical computation"
+Engineering / Technical Fields,Teamwork,2,Professional,Cross-disciplinary project delivery and safety compliance groups
+Engineering / Technical Fields,Communication Skills,2,Professional,Technical specification authoring and project reporting
+Engineering / Technical Fields,Time Management,2,Professional,Milestone delivery in capital-intensive physical engineering tasks
+Education / Teaching,Communication Skills,3,Professional,"Curriculum delivery, pedagogical clarity, and student engagement"
+Education / Teaching,English Language Skills,3,Professional,"Instructional delivery, academic writing, and scholarly publications"
+Education / Teaching,Presentation/Public Speaking,3,Professional,"Classroom instruction, conference addresses, and workshop dissemination"
+Education / Teaching,Creativity,2,Cognitive,"Innovative teaching aids, lesson plans, and differentiated student learning"
+Education / Teaching,Time Management,2,Professional,"Syllabus scheduling, examination grading, and session planning"
+Education / Teaching,Computer/Digital Skills,2,Technical,Learning Management Systems (LMS) and multimedia educational tools
+Banking / Finance,Microsoft Office/Excel,3,Technical,"Financial modeling, ledger reconciliation, and spreadsheet auditing"
+Banking / Finance,Data Analysis / Data Scientist,3,Technical,"Risk modeling, credit assessment, and portfolio analytics"
+Banking / Finance,Problem-Solving,3,Cognitive,"Quantitative reasoning, liquidity balancing, and fraud anomaly detection"
+Banking / Finance,Communication Skills,2,Professional,Client wealth advising and regulatory reporting
+Banking / Finance,Time Management,2,Professional,Adherence to daily trading windows and regulatory filing cycles
+Healthcare / Medical,Problem-Solving,3,Cognitive,Clinical diagnostic reasoning and emergency triage protocols
+Healthcare / Medical,Communication Skills,3,Professional,"Patient history elicitation, bedside empathy, and ethical consent"
+Healthcare / Medical,Teamwork,3,Professional,"Interdisciplinary surgical, nursing, and intensive care coordination"
+Healthcare / Medical,Time Management,2,Professional,Critical care response time and patient scheduling
+Healthcare / Medical,English Language Skills,2,Professional,Pharmacological indexing and international clinical literature review
+Research / Science,Problem-Solving,3,Cognitive,"Hypothesis formulation, experimental design, and empirical refutation"
+Research / Science,Data Analysis / Data Scientist,3,Technical,"Statistical significance testing, regression modeling, and data visualization"
+Research / Science,Communication Skills,3,Professional,Peer-reviewed scientific manuscript writing and symposium defense
+Research / Science,English Language Skills,2,Professional,"Scholarly reading, international grants, and publication drafting"
+Research / Science,Computer/Digital Skills,2,Technical,"Scientific computing, laboratory instrumentation software, and LaTeX"
