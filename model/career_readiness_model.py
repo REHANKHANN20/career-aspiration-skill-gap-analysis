@@ -16,8 +16,19 @@ import numpy as np
 
 
 class CareerReadinessModel:
-    def __init__(self, catalog_path=None, interactive_matrix_path=None):
+    def __init__(self, *args, **kwargs):
         base_dir = os.path.dirname(os.path.abspath(__file__))
+
+        catalog_path = None
+        interactive_matrix_path = None
+
+        if len(args) >= 1:
+            catalog_path = args[0]
+        if len(args) >= 2:
+            interactive_matrix_path = args[1]
+
+        catalog_path = kwargs.get("catalog_path", catalog_path)
+        interactive_matrix_path = kwargs.get("interactive_matrix_path", interactive_matrix_path)
 
         # Layer 1 catalog path (Survey & Research Historical Baseline)
         if catalog_path is None:
