@@ -1,7 +1,7 @@
 """
 Career Aspiration & Skill Gap Analysis for Youth — Interactive Web Application
 Community Engagement Project (CEP) — Final Semester Data Science Capstone
-Architecture: Stateless Cloud-Native Web Application (Relative Path Resolution)
+Architecture: Dual-Layer Decision Support System (Stateless Cloud-Native Web Application)
 Deployment: GitHub Repository -> Streamlit Community Cloud (24x7 Public Access)
 """
 
@@ -38,7 +38,8 @@ st.set_page_config(
 @st.cache_resource
 def load_readiness_model():
     catalog_path = os.path.join(MODEL_DIR, "career_skills_catalog.json")
-    return CareerReadinessModel(catalog_path)
+    matrix_path = os.path.join(MODEL_DIR, "interactive_role_competency_matrix.json")
+    return CareerReadinessModel(catalog_path, matrix_path)
 
 @st.cache_data
 def load_survey_data():
@@ -48,15 +49,15 @@ def load_survey_data():
     return None
 
 @st.cache_data
-def load_matrix_data():
-    csv_path = os.path.join(DATA_DIR, "career_skill_matrix.csv")
+def load_role_matrix_data():
+    csv_path = os.path.join(DATA_DIR, "role_competency_matrix.csv")
     if os.path.exists(csv_path):
         return pd.read_csv(csv_path)
     return None
 
 model = load_readiness_model()
 df_survey = load_survey_data()
-df_matrix = load_matrix_data()
+df_role_matrix = load_role_matrix_data()
 
 # -----------------------------------------------------------------------------
 # SIDEBAR NAVIGATION
@@ -79,17 +80,17 @@ app_mode = st.sidebar.radio(
 st.sidebar.markdown("---")
 st.sidebar.info(
     "**Project Classification:** Final-Year Capstone\n\n"
-    "**Framework:** Deterministic MCDA Model\n\n"
+    "**Architecture:** Dual-Layer MCDA System\n\n"
     "**Status:** Cloud Deployed (24×7 Access)"
 )
 
 # =============================================================================
-# MODULE 1: CAREER READINESS ASSESSMENT
+# MODULE 1: CAREER READINESS ASSESSMENT (LAYER 2: ROLE-SPECIFIC BENCHMARKS)
 # =============================================================================
 if app_mode == "🎯 Career Readiness Assessment":
-    st.title("🎯 Career Readiness & Skill Gap Assessment")
+    st.title("🎯 Role-Specific Career Readiness & Skill Gap Assessment")
     st.markdown(
-        "Evaluate your self-declared competencies against standardized career benchmarks. "
+        "Evaluate your self-declared competencies against standardized industry role benchmarks. "
         "Receive an explainable **Readiness Index**, identify prioritized skill gaps, and explore tailored development milestones."
     )
     st.markdown("---")
@@ -97,28 +98,32 @@ if app_mode == "🎯 Career Readiness Assessment":
     col_cfg1, col_cfg2 = st.columns([1, 1], gap="large")
 
     with col_cfg1:
-        st.subheader("1. Target Career Track")
-        career_options = model.available_careers
-        selected_career = st.selectbox(
-            "Select your desired professional pathway:",
-            options=career_options,
-            index=career_options.index("Information Technology / Data Science / AI") if "Information Technology / Data Science / AI" in career_options else 0,
-            help="Choose the occupational domain you aspire to pursue."
+        st.subheader("1. Target Career Role")
+        role_options = model.available_roles
+        selected_role = st.selectbox(
+            "Select your target career role / specialization:",
+            options=role_options,
+            index=0 if role_options else 0,
+            help="Choose the specific occupational role you aspire to pursue."
         )
 
-        req_skills_info = model.catalog[selected_career]["skills"]
+        role_info = model.interactive_roles[selected_role]
+        req_skills_info = role_info["skills"]
         req_skills_names = [s["skill"] for s in req_skills_info]
-        total_career_points = model.catalog[selected_career]["total_weighted_points"]
+        total_career_points = role_info["total_weighted_points"]
+        parent_track = role_info.get("career_track", "Broad Career Track")
 
         st.caption(
-            f"📌 Benchmark requires **{len(req_skills_names)} competencies** "
+            f"📌 **Track:** {parent_track} | **Role Benchmark:** requires **{len(req_skills_names)} competencies** "
             f"totaling **{total_career_points} weighted points**."
         )
+        if role_info.get("description"):
+            st.info(f"💡 **Role Overview:** {role_info['description']}")
 
     with col_cfg2:
         st.subheader("2. Self-Assessed Skill Proficiency")
         proficiency_level = st.select_slider(
-            "Rate your overall proficiency in the skills you possess:",
+            "Rate your overall practical proficiency in the skills you possess:",
             options=[1, 2, 3, 4, 5],
             value=3,
             format_func=lambda x: {
@@ -130,10 +135,11 @@ if app_mode == "🎯 Career Readiness Assessment":
             }[x],
             help="Higher proficiency earns full credit multipliers under the deterministic evaluation model."
         )
+        st.caption("ℹ️ *Self-reported score represents a weighted competency coverage index based on self-declaration.*")
 
     st.markdown("---")
     st.subheader("3. Current Competency Inventory")
-    st.markdown("Select all skills you currently possess for this career track:")
+    st.markdown(f"Select all competencies you currently possess for **{selected_role}**:")
 
     # Quick action buttons for easy selection
     q_btn1, q_btn2, q_btn3 = st.columns([1, 1, 3])
@@ -145,7 +151,7 @@ if app_mode == "🎯 Career Readiness Assessment":
         btn_clear = st.button("Clear Selection", use_container_width=False)
 
     # Session state initialization for skill selection
-    state_key = f"skills_sel_{selected_career}"
+    state_key = f"skills_sel_{selected_role}"
     if state_key not in st.session_state or btn_clear:
         st.session_state[state_key] = []
     if btn_all:
@@ -176,8 +182,8 @@ if app_mode == "🎯 Career Readiness Assessment":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Calculate Evaluation Results in Real Time
-    results = model.evaluate_readiness(selected_career, chosen_skills, proficiency_level)
+    # Calculate Evaluation Results in Real Time (Layer 2)
+    results = model.evaluate_interactive_role(selected_role, chosen_skills, proficiency_level)
 
     score = results["readiness_score"]
     tier = results["readiness_tier"]
@@ -220,7 +226,7 @@ if app_mode == "🎯 Career Readiness Assessment":
             for s in skills_to_strengthen:
                 st.markdown(f"- **{s['skill']}** `(Weight: {s['weight']}, Earned: {s['points_earned']:.1f} / {s['max_points']} pts)`")
         if not strong_skills and not skills_to_strengthen:
-            st.info("No matching competencies currently selected for this career track.")
+            st.info("No matching competencies currently selected for this role.")
 
     with col_diag2:
         st.error("### ⚠️ Critical Competency Gaps")
@@ -231,22 +237,22 @@ if app_mode == "🎯 Career Readiness Assessment":
                     st.write(f"**Category:** {gap['category']}")
                     st.write(f"**Occupational Rationale:** {gap['rationale']}")
         else:
-            st.success("🎉 Excellent! You have covered 100% of benchmark competencies for this track.")
+            st.success("🎉 Excellent! You have covered 100% of benchmark competencies for this role.")
 
     # Actionable Career Improvement Roadmap
     st.markdown("---")
-    st.subheader("🗺️ Personalized Career Improvement Roadmap")
+    st.subheader(f"🗺️ Tailored Learning Roadmap for {selected_role}")
 
     rd_col1, rd_col2 = st.columns(2, gap="medium")
     with rd_col1:
         st.markdown("#### ⚡ 1-Month Focused Sprint")
-        st.caption("Target high-weight Tier-3 deficits first to establish core foundation:")
+        st.caption("Target high-priority deficits first to build role-specific capability:")
         for step in roadmap_1m:
             st.markdown(f"- {step}")
 
     with rd_col2:
         st.markdown("#### 🚀 3-Month Progression Plan")
-        st.caption("Undertake practical capstone projects and placement preparation:")
+        st.caption("Undertake practical projects, portfolio building, and industry preparation:")
         for step in roadmap_3m:
             st.markdown(f"- {step}")
 
@@ -263,7 +269,6 @@ elif app_mode == "📊 Survey Analytics & Insights":
     st.markdown("---")
 
     if df_survey is not None:
-        # Helper function to tokenize multi-select fields safely
         def count_multiselect(series):
             items = []
             for val in series.dropna():
@@ -309,7 +314,7 @@ elif app_mode == "📊 Survey Analytics & Insights":
             dff = dff[dff["current_status"] == sel_status]
 
         if dff.empty:
-            st.warning("⚠️ No survey records match the selected filter combination. Please reset or widen your filters.")
+            st.warning("⚠️ No survey records match the selected filter combination. Please widen or reset your filters above.")
         else:
             # Executive Summary Cards
             k_col1, k_col2, k_col3, k_col4, k_col5 = st.columns(5)
@@ -320,10 +325,10 @@ elif app_mode == "📊 Survey Analytics & Insights":
                 short_c = "IT / AI" if "Information Technology" in top_c else ("Civil Services" if "Government" in top_c else top_c.split('/')[0].strip())
                 st.metric("Top Aspiration", short_c)
             with k_col3:
-                avg_s = dff["current_skills_count"].mean()
+                avg_s = dff["current_skills_count"].mean() if "current_skills_count" in dff.columns else 0.0
                 st.metric("Avg Skills Declared", f"{avg_s:.1f}")
             with k_col4:
-                gap_p = (dff["has_skill_gap"].mean()) * 100
+                gap_p = (dff["has_skill_gap"].mean()) * 100 if "has_skill_gap" in dff.columns else 0.0
                 st.metric("Skill Gap %", f"{gap_p:.1f}%")
             with k_col5:
                 supp_df = count_multiselect(dff["support_required"])
@@ -348,21 +353,27 @@ elif app_mode == "📊 Survey Analytics & Insights":
                     st.markdown("#### Career Field Aspirations Distribution")
                     c_counts = dff["career_field_interest"].value_counts().reset_index()
                     c_counts.columns = ["Career Track", "Count"]
-                    st.bar_chart(c_counts.set_index("Career Track"), height=320)
+                    if not c_counts.empty:
+                        st.bar_chart(c_counts.set_index("Career Track"), height=320)
+                    else:
+                        st.info("No data available for this selection.")
                 with t1_col2:
                     st.markdown("#### Decision Clarity & Confidence")
                     dec_counts = dff["career_decided"].value_counts().reset_index()
                     dec_counts.columns = ["Status", "Count"]
                     st.dataframe(dec_counts, use_container_width=True, hide_index=True)
 
-                    avg_conf = dff["career_confidence"].mean()
+                    avg_conf = dff["career_confidence"].mean() if not dff["career_confidence"].empty else 0.0
                     st.metric("Mean Career Confidence", f"{avg_conf:.2f} / 5.0")
 
                 t1_col3, t1_col4 = st.columns(2, gap="medium")
                 with t1_col3:
                     st.markdown("#### Primary Career Choice Motivators")
                     factors_df = count_multiselect(dff["career_choice_factors"]).head(6)
-                    st.bar_chart(factors_df.set_index("Category"), height=260)
+                    if not factors_df.empty:
+                        st.bar_chart(factors_df.set_index("Category"), height=260)
+                    else:
+                        st.info("No career motivators recorded.")
                 with t1_col4:
                     st.markdown("#### Information-Seeking Frequency")
                     freq_counts = dff["career_info_frequency"].value_counts().reset_index()
@@ -374,13 +385,19 @@ elif app_mode == "📊 Survey Analytics & Insights":
                 st.subheader("Competency Inventory vs Reported Gaps")
                 t2_col1, t2_col2 = st.columns(2, gap="medium")
                 with t2_col1:
-                    st.markdown("#### Top Possessed Skills (Self-Reported)")
+                    st.markdown("#### Top Possessed Skills (Survey Declared)")
                     top_skills = count_multiselect(dff["current_skills"]).head(8)
-                    st.bar_chart(top_skills.set_index("Category"), height=300)
+                    if not top_skills.empty:
+                        st.bar_chart(top_skills.set_index("Category"), height=300)
+                    else:
+                        st.info("No skills declared in this cohort.")
                 with t2_col2:
                     st.markdown("#### Top Prioritized Areas for Improvement")
                     top_gaps = count_multiselect(dff["skills_to_improve"]).head(8)
-                    st.bar_chart(top_gaps.set_index("Category"), height=300)
+                    if not top_gaps.empty:
+                        st.bar_chart(top_gaps.set_index("Category"), height=300)
+                    else:
+                        st.info("No improvement areas recorded.")
 
                 st.markdown("---")
                 t2_col3, t2_col4 = st.columns(2, gap="medium")
@@ -388,13 +405,19 @@ elif app_mode == "📊 Survey Analytics & Insights":
                     st.markdown("#### Self-Assessed General Skill Level (1–5)")
                     skill_dist = dff["overall_skill_level"].value_counts().sort_index().reset_index()
                     skill_dist.columns = ["Level", "Count"]
-                    st.bar_chart(skill_dist.set_index("Level"), height=260)
+                    if not skill_dist.empty:
+                        st.bar_chart(skill_dist.set_index("Level"), height=260)
+                    else:
+                        st.info("No skill levels recorded.")
                 with t2_col4:
                     st.markdown("#### Skill Count vs Reported Challenges")
-                    trend_df = dff.groupby("current_skills_count")["challenges_count"].mean().reset_index()
-                    trend_df.columns = ["Declared Skills", "Avg Challenges"]
-                    st.line_chart(trend_df.set_index("Declared Skills"), height=260)
-                    st.caption("📌 **Empirical Observation:** Youth possessing more technical skills actively report more operational hurdles, indicating heightened situational awareness of workplace requirements.")
+                    if len(dff) > 1:
+                        trend_df = dff.groupby("current_skills_count")["challenges_count"].mean().reset_index()
+                        trend_df.columns = ["Declared Skills", "Avg Challenges"]
+                        st.line_chart(trend_df.set_index("Declared Skills"), height=260)
+                        st.caption("📌 **Empirical Observation:** Youth possessing more technical skills actively report more operational hurdles, indicating heightened situational awareness of workplace requirements.")
+                    else:
+                        st.info("Insufficient data points to plot trend line.")
 
             # --- TAB 3: CHALLENGES & SUPPORT ---
             with tab3:
@@ -403,16 +426,22 @@ elif app_mode == "📊 Survey Analytics & Insights":
                 with t3_col1:
                     st.markdown("#### Primary Career Hurdles Reported")
                     chal_df = count_multiselect(dff["skill_challenges"]).head(6)
-                    st.bar_chart(chal_df.set_index("Category"), height=300)
+                    if not chal_df.empty:
+                        st.bar_chart(chal_df.set_index("Category"), height=300)
+                    else:
+                        st.info("No challenges recorded.")
                 with t3_col2:
                     st.markdown("#### Institutional Support Types Requested")
                     supp_df = count_multiselect(dff["support_required"]).head(6)
-                    st.bar_chart(supp_df.set_index("Category"), height=300)
+                    if not supp_df.empty:
+                        st.bar_chart(supp_df.set_index("Category"), height=300)
+                    else:
+                        st.info("No support requests recorded.")
 
                 t3_col3, t3_col4 = st.columns(2, gap="medium")
                 with t3_col3:
                     st.markdown("#### Institutional Guidance Usefulness Rating (1–5)")
-                    g_avg = dff["guidance_usefulness_rating"].mean()
+                    g_avg = dff["guidance_usefulness_rating"].mean() if not dff["guidance_usefulness_rating"].empty else 0.0
                     st.metric("Mean Guidance Rating", f"{g_avg:.2f} / 5.0")
                     g_dist = dff["guidance_usefulness_rating"].round().value_counts().sort_index().reset_index()
                     g_dist.columns = ["Rating", "Count"]
@@ -422,7 +451,7 @@ elif app_mode == "📊 Survey Analytics & Insights":
                     train_dist = dff["participated_training_or_internship"].value_counts().reset_index()
                     train_dist.columns = ["Participated", "Count"]
                     st.dataframe(train_dist, use_container_width=True, hide_index=True)
-                    pct_trained = ((dff["participated_training_or_internship"] == "Yes").mean()) * 100
+                    pct_trained = ((dff["participated_training_or_internship"] == "Yes").mean()) * 100 if len(dff) > 0 else 0.0
                     st.info(f"**{pct_trained:.1f}%** of youth in the filtered cohort have attended formal training or internships.")
 
             # --- TAB 4: READINESS & YOUTH PERSONAS ---
@@ -430,10 +459,10 @@ elif app_mode == "📊 Survey Analytics & Insights":
                 st.subheader("Readiness Scores & Exploratory Youth Personas")
                 t4_col1, t4_col2 = st.columns(2, gap="medium")
                 with t4_col1:
-                    st.markdown("#### Readiness Score Distribution (Phase 5 Model)")
-                    r_mean = dff["readiness_score"].mean()
-                    r_med = dff["readiness_score"].median()
-                    st.metric("Mean Readiness", f"{r_mean:.1f}%", delta=f"Median: {r_med:.1f}%")
+                    st.markdown("#### Survey Cohort Readiness Index")
+                    r_mean = dff["readiness_score"].mean() if not dff["readiness_score"].empty else 0.0
+                    r_med = dff["readiness_score"].median() if not dff["readiness_score"].empty else 0.0
+                    st.metric("Cohort Mean Readiness", f"{r_mean:.1f}%", delta=f"Median: {r_med:.1f}%")
 
                     tier_table = dff["readiness_tier"].value_counts().reset_index()
                     tier_table.columns = ["Readiness Tier", "Count"]
@@ -442,7 +471,10 @@ elif app_mode == "📊 Survey Analytics & Insights":
                     st.markdown("#### Average Readiness by Career Track")
                     track_r = dff.groupby("career_field_interest")["readiness_score"].mean().round(1).reset_index()
                     track_r.columns = ["Career Track", "Avg Readiness (%)"]
-                    st.bar_chart(track_r.set_index("Career Track"), height=280)
+                    if not track_r.empty:
+                        st.bar_chart(track_r.set_index("Career Track"), height=280)
+                    else:
+                        st.info("No track scores available.")
 
                 st.markdown("---")
                 st.markdown("#### 🤖 Exploratory ML Youth Personas (K-Means Clusters)")
@@ -481,25 +513,24 @@ elif app_mode == "📊 Survey Analytics & Insights":
 # MODULE 3: CAREER COMPETENCY FRAMEWORK
 # =============================================================================
 elif app_mode == "🗺️ Career Competency Framework":
-    st.title("🗺️ Career Competency Framework & Benchmark Matrix")
+    st.title("🗺️ Role-Specific Career Competency Framework")
     st.markdown(
-        "Explore the **48 standardized competency benchmarks** synthesized across 8 professional pathways. "
-        "Each competency is weighted by industry importance to ensure rigorous multi-criteria evaluation."
+        "Explore the **69 standardized competency benchmarks** synthesized across 11 specific occupational roles. "
+        "Each competency is weighted by industry importance to ensure transparent multi-criteria evaluation."
     )
     st.markdown("---")
 
-    if df_matrix is not None:
+    if df_role_matrix is not None:
         mf_col1, mf_col2 = st.columns([2, 1])
         with mf_col1:
-            career_col = "career" if "career" in df_matrix.columns else "career_track"
-            unique_tracks = ["All Career Tracks"] + sorted(df_matrix[career_col].unique().tolist())
-            track_filter = st.selectbox("Filter by Occupational Pathway:", unique_tracks)
+            unique_roles = ["All Roles"] + sorted(df_role_matrix["target_role"].unique().tolist())
+            role_filter = st.selectbox("Filter by Target Career Role:", unique_roles)
         with mf_col2:
             weight_filter = st.selectbox("Filter by Weight Tier:", ["All Tiers", "Tier 3: Core (Weight 3)", "Tier 2: Important (Weight 2)", "Tier 1: Foundational (Weight 1)"])
 
-        filtered_matrix = df_matrix.copy()
-        if track_filter != "All Career Tracks":
-            filtered_matrix = filtered_matrix[filtered_matrix[career_col] == track_filter]
+        filtered_matrix = df_role_matrix.copy()
+        if role_filter != "All Roles":
+            filtered_matrix = filtered_matrix[filtered_matrix["target_role"] == role_filter]
         if weight_filter == "Tier 3: Core (Weight 3)":
             filtered_matrix = filtered_matrix[filtered_matrix["weight"] == 3]
         elif weight_filter == "Tier 2: Important (Weight 2)":
@@ -510,17 +541,18 @@ elif app_mode == "🗺️ Career Competency Framework":
         st.dataframe(
             filtered_matrix,
             column_config={
-                career_col: st.column_config.TextColumn("Career Track", width="medium"),
-                "required_skill" if "required_skill" in filtered_matrix.columns else "skill": st.column_config.TextColumn("Competency Name", width="medium"),
+                "career_track": st.column_config.TextColumn("Career Track", width="medium"),
+                "target_role": st.column_config.TextColumn("Target Role", width="medium"),
+                "competency_name": st.column_config.TextColumn("Competency Name", width="large"),
                 "weight": st.column_config.NumberColumn("Weight", help="3=Core, 2=Important, 1=Foundational"),
                 "category": st.column_config.TextColumn("Category"),
-                "competency_rationale": st.column_config.TextColumn("Occupational Rationale", width="large")
+                "occupational_rationale": st.column_config.TextColumn("Occupational Rationale", width="large")
             },
             use_container_width=True,
             hide_index=True
         )
     else:
-        st.warning("Competency matrix not found in data/ directory.")
+        st.warning("Role competency matrix not found in data/ directory.")
 
 
 # =============================================================================
@@ -538,13 +570,19 @@ elif app_mode == "ℹ️ Research Methodology & Framework":
     st.markdown(
         "Higher education graduates frequently encounter an employability gap arising from the divergence between academic curricula "
         "and evolving industry competency requirements. This study aims to:\n"
-        "- Quantify career readiness across diverse disciplines using transparent scoring.\n"
+        "- Quantify career readiness across diverse disciplines using transparent, deterministic scoring.\n"
         "- Isolate prioritized skill gaps to deliver targeted, time-bounded learning milestones.\n"
         "- Explore youth behavioral archetypes through unsupervised machine learning."
     )
 
-    st.subheader("2. Mathematical Formulation (Phase 5 Model)")
-    st.markdown("For any targeted career $C$ requiring $N$ competencies with weights $W_i \\in \\{1, 2, 3\\}$:")
+    st.subheader("2. Dual-Layer System Architecture")
+    st.markdown(
+        "- **Layer 1 (Research & Survey Analytics):** Preserves original 14 self-reported questionnaire skills across $N=38$ preliminary development respondents to ensure historical survey reproducibility.\n"
+        "- **Layer 2 (Interactive Career Assessment):** Employs an evidence-based matrix of 11 distinct occupational roles (69 industry competencies) to deliver authentic, role-specific guidance."
+    )
+
+    st.subheader("3. Mathematical Formulation (Phase 5 Model)")
+    st.markdown("For any targeted role requiring $N$ competencies with weights $W_i \\in \\{1, 2, 3\\}$:")
     st.latex(r"\text{Readiness Index (\%)} = \left( \frac{\sum_{i \in \text{Possessed}} W_i \times \mu(L)}{\sum_{i=1}^{N} W_i} \right) \times 100")
 
     st.markdown("Where $\\mu(L)$ represents the **Proficiency Multiplier** calibrated to self-assessed proficiency $L$:")
@@ -552,16 +590,10 @@ elif app_mode == "ℹ️ Research Methodology & Framework":
     st.markdown("- **$L = 3$ (Competent / Intermediate):** $\\mu(L) = 0.8$ (80% weighted credit)")
     st.markdown("- **$L \\le 2$ (Developing / Novice):** $\\mu(L) = 0.5$ (50% weighted credit)")
 
-    st.subheader("3. Rationale for Explainable Modeling")
+    st.subheader("4. Rationale for Explainable Modeling")
     st.markdown(
         "- **Student Counseling Ethics:** Career guidance must be transparent. Black-box algorithms cannot provide students with clear, defensible milestone explanations.\n"
         "- **Small-Sample Validity:** In early-stage community research ($N=38$ development sample), complex models suffer from high variance and overfitting. Deterministic scoring guarantees consistent, reproducible outputs."
-    )
-
-    st.subheader("4. Mathematical Monotonicity & Validation")
-    st.markdown(
-        "- **Strict Monotonicity:** Formally proven across 224 test scenarios that adding a matching skill or increasing proficiency never reduces readiness ($\\Delta L \\ge 0 \\implies \\Delta \\text{Score} \\ge 0$).\n"
-        "- **Strict Boundedness:** Scores are mathematically bounded within $[0.0\\%, 100.0\\%]$."
     )
 
     st.subheader("5. Privacy Preservation & Academic Scope")

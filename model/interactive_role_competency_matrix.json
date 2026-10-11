@@ -1,0 +1,504 @@
+{
+  "Information Technology / Software Engineering": {
+    "career_track": "Information Technology / Data Science / AI",
+    "track_category": "Technical & Digital",
+    "description": "Building scalable software applications, APIs, web systems, and mobile applications.",
+    "total_weighted_points": 18,
+    "skills": [
+      {
+        "skill": "Data Structures & Algorithms (DSA)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Core problem-solving, code efficiency, and technical interview benchmark"
+      },
+      {
+        "skill": "Programming Languages (Python, Java, C++, JavaScript)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Syntax mastery, OOP principles, and production application development"
+      },
+      {
+        "skill": "Git Version Control & GitHub",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "Team code collaboration, branching, PR review workflows, and CI/CD basics"
+      },
+      {
+        "skill": "Web / API Development (REST, Backend/Frontend)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Building client-server architectures, database integration, and microservices"
+      },
+      {
+        "skill": "Database Management & SQL",
+        "weight": 2,
+        "category": "Technical",
+        "rationale": "Relational schema design, querying, indexing, and data persistence"
+      },
+      {
+        "skill": "Debugging & System Troubleshooting",
+        "weight": 2,
+        "category": "Cognitive",
+        "rationale": "Root-cause bug identification, error log tracing, and automated unit testing"
+      },
+      {
+        "skill": "Agile Teamwork & Communication",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Scrum sprint ceremonies, standups, and cross-functional feature delivery"
+      }
+    ]
+  },
+  "Data Science & AI Engineering": {
+    "career_track": "Information Technology / Data Science / AI",
+    "track_category": "Technical & Digital",
+    "description": "Extracting insights from complex datasets and designing machine learning models.",
+    "total_weighted_points": 18,
+    "skills": [
+      {
+        "skill": "Python for Data Analysis (Pandas, NumPy)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Data wrangling, cleaning, manipulation, and exploratory data analysis (EDA)"
+      },
+      {
+        "skill": "Applied Machine Learning (Scikit-Learn)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Supervised/unsupervised modeling, cross-validation, and performance evaluation"
+      },
+      {
+        "skill": "SQL & Relational Databases",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Complex aggregations, window functions, and data extraction pipelines"
+      },
+      {
+        "skill": "Statistical Inference & Probability",
+        "weight": 3,
+        "category": "Mathematical",
+        "rationale": "Hypothesis testing, distributions, A/B testing, and correlation analysis"
+      },
+      {
+        "skill": "Data Visualization (Seaborn, Power BI, Streamlit)",
+        "weight": 2,
+        "category": "Technical / Tools",
+        "rationale": "Communicating insights to stakeholders via dashboards and statistical charts"
+      },
+      {
+        "skill": "Analytical Problem-Solving",
+        "weight": 2,
+        "category": "Cognitive",
+        "rationale": "Translating ambiguous business problems into structured analytical workflows"
+      },
+      {
+        "skill": "Technical Storytelling & Presentation",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Presenting data insights, model trade-offs, and metric impact to decision makers"
+      }
+    ]
+  },
+  "Banking Operations & Commercial Banking": {
+    "career_track": "Banking / Finance",
+    "track_category": "Finance & Commerce",
+    "description": "Retail and commercial banking, loan processing, client accounts, KYC, and regulatory compliance.",
+    "total_weighted_points": 16,
+    "skills": [
+      {
+        "skill": "Banking Operations & KYC/AML Guidelines",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "RBI regulations, statutory compliance, anti-money laundering, and account opening protocols"
+      },
+      {
+        "skill": "Spreadsheet Management (Excel / Sheets)",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "Daily ledger tracking, bank reconciliation statements, and operational reporting"
+      },
+      {
+        "skill": "Financial Accounting Basics (Debit/Credit, Ledgers)",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Double-entry bookkeeping, trial balance verification, and transaction auditing"
+      },
+      {
+        "skill": "Client Relationship & Customer Advisory",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Explaining banking products, cross-selling deposits/loans, and resolving grievances"
+      },
+      {
+        "skill": "Retail Credit & Loan Appraisal Basics",
+        "weight": 2,
+        "category": "Analytical",
+        "rationale": "Evaluating applicant CIBIL scores, repayment capacity, and documentation verification"
+      },
+      {
+        "skill": "Ethical Compliance & Accuracy",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Zero-tolerance for financial discrepancies, audit adherence, and data confidentiality"
+      }
+    ]
+  },
+  "Corporate Finance & Investment Analysis": {
+    "career_track": "Banking / Finance",
+    "track_category": "Finance & Commerce",
+    "description": "Financial modeling, equity research, corporate valuation, budgeting, and capital allocation.",
+    "total_weighted_points": 17,
+    "skills": [
+      {
+        "skill": "Financial Statement Analysis (P&L, Balance Sheet, Cash Flow)",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Interpreting audited annual reports, working capital cycles, and solvency ratios"
+      },
+      {
+        "skill": "Advanced Financial Modeling in Excel",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "Building integrated 3-statement forecast models, dynamic schedules, and sensitivity analysis"
+      },
+      {
+        "skill": "Corporate Valuation (DCF, Relative Multiples)",
+        "weight": 3,
+        "category": "Analytical",
+        "rationale": "Estimating intrinsic enterprise value, WACC calculations, and trading comparables"
+      },
+      {
+        "skill": "Indian Corporate Taxation & GST Basics",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Statutory corporate tax provisions, input tax credit mechanisms, and financial planning"
+      },
+      {
+        "skill": "Quantitative Reasoning & Ratio Analysis",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Assessing ROE, ROCE, debt-equity ratios, and operating leverage metrics"
+      },
+      {
+        "skill": "Executive Investment Reporting & Presentation",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Drafting investment committee memos, research notes, and board presentations"
+      }
+    ]
+  },
+  "Healthcare — Clinical & Patient Care": {
+    "career_track": "Healthcare / Medical",
+    "track_category": "Healthcare & Life Sciences",
+    "description": "Direct patient diagnosis, treatment, bedside nursing, pharmacology, and clinical procedures.",
+    "total_weighted_points": 18,
+    "skills": [
+      {
+        "skill": "Human Anatomy & Physiology",
+        "weight": 3,
+        "category": "Clinical Science",
+        "rationale": "Foundational biological framework for disease understanding and anatomical localization"
+      },
+      {
+        "skill": "Clinical History Taking & Physical Examination",
+        "weight": 3,
+        "category": "Clinical Practice",
+        "rationale": "Structured patient interview, vital sign recording, symptom elicitation, and differential diagnosis"
+      },
+      {
+        "skill": "Basic Pharmacology & Medication Safety",
+        "weight": 3,
+        "category": "Clinical Science",
+        "rationale": "Drug classes, dosages, contraindications, adverse interactions, and safe administration"
+      },
+      {
+        "skill": "Infection Control & Bio-Safety Protocols",
+        "weight": 3,
+        "category": "Clinical Practice",
+        "rationale": "Aseptic technique, personal protective equipment (PPE), biomedical waste handling, sterilization"
+      },
+      {
+        "skill": "Basic Life Support (BLS) & Emergency Triage",
+        "weight": 2,
+        "category": "Clinical Emergency",
+        "rationale": "CPR, AED deployment, airway management, and high-pressure triage prioritization"
+      },
+      {
+        "skill": "Patient Empathy & Bedside Communication",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Compassionate patient counseling, informed consent communication, and family debriefing"
+      },
+      {
+        "skill": "Medical Ethics & Patient Confidentiality",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "HIPAA/statutory patient privacy, ethical healthcare delivery, and medico-legal documentation"
+      }
+    ]
+  },
+  "Healthcare — Hospital Administration & Health Informatics": {
+    "career_track": "Healthcare / Medical",
+    "track_category": "Healthcare & Life Sciences",
+    "description": "Hospital operations management, electronic health records (EHR), public health policy, and health tech.",
+    "total_weighted_points": 16,
+    "skills": [
+      {
+        "skill": "Healthcare Systems & Hospital Operations",
+        "weight": 3,
+        "category": "Management",
+        "rationale": "OPD/IPD management, bed occupancy optimization, patient admission flows, and accreditation (NABH)"
+      },
+      {
+        "skill": "Electronic Health Records (EHR) & Health IT",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "Managing digital patient records, ICD-10/ICD-11 diagnostic coding, and EMR workflow systems"
+      },
+      {
+        "skill": "Healthcare Quality Assurance & Audit Compliance",
+        "weight": 3,
+        "category": "Operations",
+        "rationale": "Clinical audits, patient safety protocols, statutory medical reporting, and SOP compliance"
+      },
+      {
+        "skill": "Medical Billing, Insurance & TPA Coordination",
+        "weight": 3,
+        "category": "Finance / Admin",
+        "rationale": "Ayushman Bharat / private health insurance claims processing, cashless settlement, and billing"
+      },
+      {
+        "skill": "Interdepartmental Hospital Coordination",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Liaison between medical staff, nursing superintendents, pharmacy, laboratory, and patients"
+      },
+      {
+        "skill": "Health Data Analytics & Operational Excel",
+        "weight": 2,
+        "category": "Technical / Analytical",
+        "rationale": "Analyzing patient length of stay, mortality/morbidity metrics, and hospital supply inventories"
+      }
+    ]
+  },
+  "Civil Services & Public Administration (UPSC / State PSC)": {
+    "career_track": "Government Services / Civil Services",
+    "track_category": "Public Policy & Administration",
+    "description": "Public governance, administrative leadership, district policy execution, and statutory examinations.",
+    "total_weighted_points": 18,
+    "skills": [
+      {
+        "skill": "Indian Polity & Constitutional Law",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Constitutional articles, fundamental rights, judiciary, legislative procedures, and federal structure"
+      },
+      {
+        "skill": "Indian Economy, Development & Public Finance",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Macroeconomic indicators, fiscal policy, budget analysis, poverty alleviation, and public schemes"
+      },
+      {
+        "skill": "Modern Indian History, Geography & Current Affairs",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "General Studies foundation, national/international bilateral relations, geography, and ecology"
+      },
+      {
+        "skill": "Ethics, Integrity & Administrative Aptitude",
+        "weight": 3,
+        "category": "Cognitive / Ethics",
+        "rationale": "Ethical case study dilemma resolution, moral accountability, probity in governance, and empathy"
+      },
+      {
+        "skill": "Formal Bureaucratic Drafting & Essay Writing",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Precise essay arguments, policy brief drafting, official notifications, and structured writing"
+      },
+      {
+        "skill": "Analytical Aptitude & Logical Reasoning (CSAT)",
+        "weight": 3,
+        "category": "Cognitive",
+        "rationale": "Comprehension, quantitative data interpretation, syllogisms, and administrative decision-making"
+      }
+    ]
+  },
+  "Core Engineering & CAD/Manufacturing": {
+    "career_track": "Engineering / Technical Fields",
+    "track_category": "Engineering & Technology",
+    "description": "Mechanical, electrical, civil, or electronics engineering design, CAD drafting, and manufacturing operations.",
+    "total_weighted_points": 17,
+    "skills": [
+      {
+        "skill": "Core Engineering Principles (Mechanics / Thermodynamics / Circuits)",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Physical laws, strength of materials, circuit laws, and foundational discipline science"
+      },
+      {
+        "skill": "Computer-Aided Design (AutoCAD / SolidWorks / CATIA)",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "2D drafting, 3D parametric modeling, assembly creation, and GD&T tolerance standards"
+      },
+      {
+        "skill": "Engineering Mathematics & Analytical Calculation",
+        "weight": 3,
+        "category": "Mathematical",
+        "rationale": "Differential calculus, linear algebra, vector mechanics, and numerical simulations"
+      },
+      {
+        "skill": "Manufacturing Processes & Industrial Safety (OSHA)",
+        "weight": 3,
+        "category": "Operations",
+        "rationale": "Machining, casting, fabrication, quality testing standards (ISO), and hazard prevention"
+      },
+      {
+        "skill": "Technical Report Writing & Engineering Documentation",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Component specifications, maintenance manuals, bill of materials (BOM), and client sheets"
+      },
+      {
+        "skill": "Cross-Functional Engineering Teamwork",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Coordinating between shop-floor technicians, design architects, vendors, and project managers"
+      }
+    ]
+  },
+  "Digital Marketing & Brand Growth": {
+    "career_track": "Business / Entrepreneurship",
+    "track_category": "Business & Commercial",
+    "description": "Performance marketing, search engine optimization, content strategy, social advertising, and brand growth.",
+    "total_weighted_points": 16,
+    "skills": [
+      {
+        "skill": "Search Engine Optimization (SEO & Content Strategy)",
+        "weight": 3,
+        "category": "Technical",
+        "rationale": "Keyword research, technical on-page audit, backlink strategy, and organic rank optimization"
+      },
+      {
+        "skill": "Paid Performance Advertising (Meta Ads & Google Ads)",
+        "weight": 3,
+        "category": "Technical / Tools",
+        "rationale": "PPC campaign architecture, audience targeting, ROAS optimization, and budget management"
+      },
+      {
+        "skill": "Web Analytics & Conversion Tracking (Google Analytics 4)",
+        "weight": 3,
+        "category": "Analytical",
+        "rationale": "Tracking funnel drop-offs, UTM parameters, conversion event tagging, and attribution modeling"
+      },
+      {
+        "skill": "Copywriting & Content Creation",
+        "weight": 3,
+        "category": "Creative",
+        "rationale": "Writing high-converting ad copy, landing page headlines, email newsletters, and creative briefs"
+      },
+      {
+        "skill": "Visual Design & Asset Creation (Canva / Figma Basics)",
+        "weight": 2,
+        "category": "Creative / Tools",
+        "rationale": "Designing engaging social media carousels, ad banners, and infographics"
+      },
+      {
+        "skill": "Social Media Community Management",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Brand voice maintenance, audience engagement, viral trend adaptation, and community support"
+      }
+    ]
+  },
+  "Education & Academic Teaching": {
+    "career_track": "Education / Teaching",
+    "track_category": "Education & Humanities",
+    "description": "Pedagogical instruction, curriculum design, student assessment, and educational leadership.",
+    "total_weighted_points": 16,
+    "skills": [
+      {
+        "skill": "Subject Matter Mastery & Curriculum Delivery",
+        "weight": 3,
+        "category": "Domain Knowledge",
+        "rationale": "Deep conceptual knowledge of chosen discipline and structured syllabus execution"
+      },
+      {
+        "skill": "Pedagogical Techniques & Classroom Management",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Active learning frameworks, lesson planning, student engagement, and inclusive teaching"
+      },
+      {
+        "skill": "Public Speaking & Verbal Articulation",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Confident, clear lecture delivery, vocal modulation, and engaging instructional style"
+      },
+      {
+        "skill": "Student Assessment, Rubrics & Constructive Feedback",
+        "weight": 3,
+        "category": "Analytical",
+        "rationale": "Designing fair tests, formative grading rubrics, diagnostic evaluations, and parent updates"
+      },
+      {
+        "skill": "Educational Technology & LMS (Google Classroom, Zoom)",
+        "weight": 2,
+        "category": "Technical / Tools",
+        "rationale": "Managing digital classrooms, interactive quiz platforms (Kahoot), and online submissions"
+      },
+      {
+        "skill": "Student Mentorship & Empathy",
+        "weight": 2,
+        "category": "Professional",
+        "rationale": "Fostering psychological safety, student pastoral care, and motivational encouragement"
+      }
+    ]
+  },
+  "Scientific Research & Laboratory Investigation": {
+    "career_track": "Research / Science",
+    "track_category": "Scientific Research",
+    "description": "Formulating hypotheses, controlled scientific experimentation, laboratory data collection, and peer-reviewed publishing.",
+    "total_weighted_points": 17,
+    "skills": [
+      {
+        "skill": "Scientific Method & Experimental Design",
+        "weight": 3,
+        "category": "Scientific Method",
+        "rationale": "Formulating falsifiable hypotheses, control group design, and methodological rigor"
+      },
+      {
+        "skill": "Statistical Analysis & Scientific Computing",
+        "weight": 3,
+        "category": "Analytical",
+        "rationale": "ANOVA, regression models, p-value interpretation, confidence intervals, and data plotting"
+      },
+      {
+        "skill": "Laboratory Instrumentation & Protocol Compliance",
+        "weight": 3,
+        "category": "Technical / Practical",
+        "rationale": "Operating standard lab equipment, sample preparation, calibration, and safety protocols"
+      },
+      {
+        "skill": "Scholarly Literature Review & Citation Standards",
+        "weight": 3,
+        "category": "Academic",
+        "rationale": "Critical reading of peer-reviewed papers (PubMed/IEEE), meta-analysis, and reference management"
+      },
+      {
+        "skill": "Manuscript Writing & Scientific Presentation",
+        "weight": 3,
+        "category": "Professional",
+        "rationale": "Drafting IMRaD research papers, poster presentations, and defending findings at symposiums"
+      },
+      {
+        "skill": "Research Ethics & Academic Integrity",
+        "weight": 2,
+        "category": "Ethics",
+        "rationale": "Zero plagiarism, honest reporting of negative results, peer review ethics, and IRB compliance"
+      }
+    ]
+  }
+}
