@@ -8,6 +8,7 @@ Deployment: GitHub Repository -> Streamlit Community Cloud (24x7 Accessible)
 import os
 import sys
 import json
+import re
 import pandas as pd
 import streamlit as st
 
@@ -245,64 +246,219 @@ if app_mode == "🎯 Career Readiness Assessment":
                 st.markdown(f"- {item}")
 
 # -----------------------------------------------------------------------------
-# MODULE 2: SURVEY ANALYTICS & INSIGHTS
+# MODULE 2: SURVEY ANALYTICS & INSIGHTS (INTERACTIVE WEB DASHBOARD)
 # -----------------------------------------------------------------------------
 elif app_mode == "📊 Survey Analytics & Insights":
     st.title("📊 Youth Survey Analytics & Field Evidence")
-    st.markdown("Visualized findings from our empirical Community Engagement Project (CEP) survey dataset.")
+    st.markdown(
+        "Interactive analytics dashboard visualizing findings from our empirical Community Engagement Project (CEP) survey. "
+        "*Note: Metrics reflect our preliminary development cohort (N=38) and will be refreshed upon survey closure.*"
+    )
     st.markdown("---")
 
     if df_survey is not None:
-        total_respondents = len(df_survey)
+        # Helper function to unnest and count multi-select semicolon/comma separated responses
+        def count_multiselect(series):
+            items = []
+            for val in series.dropna():
+                for item in re.split(r'[;,]\s*', str(val).strip()):
+                    clean = item.strip().rstrip('.,;')
+                    if clean and len(clean) > 1 and clean.lower() != "nan":
+                        items.append(clean)
+            s = pd.Series(items).value_counts()
+            return pd.DataFrame({"Item": s.index, "Count": s.values})
 
-        s_col1, s_col2, s_col3, s_col4 = st.columns(4)
-        with s_col1:
-            st.metric("Total Surveyed Youth", total_respondents)
-        with s_col2:
-            gap_pct = (df_survey["has_skill_gap"].mean()) * 100
-            st.metric("Youth Facing Skill Gap", f"{gap_pct:.1f}%")
-        with s_col3:
-            avg_conf = df_survey["career_confidence"].mean()
-            st.metric("Average Career Confidence", f"{avg_conf:.2f} / 5.0")
-        with s_col4:
-            top_career = df_survey["career_field_interest"].mode()[0]
-            st.metric("Top Career Aspiration", "IT / AI / Data")
+        # --- GLOBAL SLICER FILTER BAR ---
+        with st.expander("🔍 Interactive Dashboard Filters (Slicers)", expanded=True):
+            f_col1, f_col2, f_col3, f_col4, f_col5 = st.columns(5)
+            
+            with f_col1:
+                career_list = ["All Careers"] + sorted(df_survey["career_field_interest"].dropna().unique().tolist())
+                sel_career = st.selectbox("Career Field:", career_list)
+            with f_col2:
+                age_list = ["All Ages"] + sorted(df_survey["age_group"].dropna().unique().tolist())
+                sel_age = st.selectbox("Age Group:", age_list)
+            with f_col3:
+                gender_list = ["All Genders"] + sorted(df_survey["gender"].dropna().unique().tolist())
+                sel_gender = st.selectbox("Gender:", gender_list)
+            with f_col4:
+                edu_list = ["All Qualifications"] + sorted(df_survey["education_qualification"].dropna().unique().tolist())
+                sel_edu = st.selectbox("Qualification:", edu_list)
+            with f_col5:
+                status_list = ["All Statuses"] + sorted(df_survey["current_status"].dropna().unique().tolist())
+                sel_status = st.selectbox("Current Status:", status_list)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+        # Apply slicer filters dynamically
+        dff = df_survey.copy()
+        if sel_career != "All Careers":
+            dff = dff[dff["career_field_interest"] == sel_career]
+        if sel_age != "All Ages":
+            dff = dff[dff["age_group"] == sel_age]
+        if sel_gender != "All Genders":
+            dff = dff[dff["gender"] == sel_gender]
+        if sel_edu != "All Qualifications":
+            dff = dff[dff["education_qualification"] == sel_edu]
+        if sel_status != "All Statuses":
+            dff = dff[dff["current_status"] == sel_status]
 
-        col_g1, col_g2 = st.columns(2)
-        with col_g1:
-            st.subheader("Aspirations by Career Track")
-            career_counts = df_survey["career_field_interest"].value_counts().reset_index()
-            career_counts.columns = ["Career Track", "Count"]
-            st.bar_chart(career_counts.set_index("Career Track"), height=320)
+        if dff.empty:
+            st.warning("⚠️ No respondents match the selected filter combination. Please adjust your filters above.")
+        else:
+            # --- EXECUTIVE KPI SUMMARY CARDS ---
+            kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
+            with kpi1:
+                st.metric(
+                    "Selected Cohort",
+                    f"{len(dff)} Youth",
+                    delta=f"{len(dff) - len(df_survey)}" if len(dff) != len(df_survey) else "Full Cohort"
+                )
+            with kpi2:
+                top_c = dff["career_field_interest"].mode()[0] if not dff["career_field_interest"].empty else "N/A"
+                short_c = "IT / AI" if "Information Technology" in top_c else ("Civil Services" if "Government" in top_c else top_c.split('/')[0].strip())
+                st.metric("Top Aspiration", short_c)
+            with kpi3:
+                avg_s = dff["current_skills_count"].mean()
+                st.metric("Avg Skills Declared", f"{avg_s:.1f} skills")
+            with kpi4:
+                gap_p = (dff["has_skill_gap"].mean()) * 100
+                st.metric("Skill Gap Awareness", f"{gap_p:.1f}%")
+            with kpi5:
+                supp_df = count_multiselect(dff["support_required"])
+                top_supp = supp_df.iloc[0]["Item"] if not supp_df.empty else "N/A"
+                st.metric("Top Support Need", top_supp)
 
-        with col_g2:
-            st.subheader("Distribution of Perceived Skill Gap")
-            gap_counts = df_survey["perceived_skill_gap"].value_counts().reset_index()
-            gap_counts.columns = ["Perceived Skill Gap", "Count"]
-            st.bar_chart(gap_counts.set_index("Perceived Skill Gap"), color="#FF4B4B", height=320)
+            st.markdown("<br>", unsafe_allow_html=True)
 
-        col_g3, col_g4 = st.columns(2)
-        with col_g3:
-            st.subheader("Education Levels of Participants")
-            edu_counts = df_survey["education_qualification"].value_counts().reset_index()
-            edu_counts.columns = ["Qualification", "Count"]
-            st.dataframe(edu_counts, use_container_width=True, hide_index=True)
+            # --- 4 MULTI-TAB DASHBOARD MODULES ---
+            tab_asp, tab_skl, tab_chl, tab_per = st.tabs([
+                "🎯 Career Aspirations",
+                "💡 Skills & Competency Gaps",
+                "🚧 Challenges & Support",
+                "🤖 Readiness & Exploratory Personas"
+            ])
 
-        with col_g4:
-            st.subheader("Age Breakdown")
-            age_counts = df_survey["age_group"].value_counts().reset_index()
-            age_counts.columns = ["Age Group", "Count"]
-            st.dataframe(age_counts, use_container_width=True, hide_index=True)
+            # --- TAB 1: CAREER ASPIRATIONS ---
+            with tab_asp:
+                st.subheader("Career Ambitions & Decision Trajectory")
+                col_a1, col_a2 = st.columns([3, 2], gap="medium")
+                with col_a1:
+                    st.markdown("#### Primary Career Track Distribution")
+                    career_counts = dff["career_field_interest"].value_counts().reset_index(names=["Career Track", "Respondents"])
+                    st.bar_chart(career_counts.set_index("Career Track"), color="#1E88E5", height=320)
+                with col_a2:
+                    st.markdown("#### Career Decision Clarity")
+                    decided_counts = dff["career_decided"].value_counts().reset_index(names=["Decision Status", "Respondents"])
+                    st.dataframe(decided_counts, use_container_width=True, hide_index=True)
+                    
+                    avg_conf = dff["career_confidence"].mean()
+                    st.metric("Mean Career Confidence", f"{avg_conf:.2f} / 5.0", help="1=Low, 5=High Confidence")
 
-        st.markdown("---")
-        st.subheader("💡 Key Analytical Discovery: The Conscious Competence Phenomenon")
-        st.info(
-            "**Finding from SQL EDA & Validation:** Students in technical fields (IT/AI) possessing the highest number of skills (average 5.21 skills) "
-            "reported a **higher perceived skill gap (37.3% readiness)** compared to youth declaring fewer skills who perceived 'no gap' (21.7% actual readiness). "
-            "As youth develop technical proficiency, their awareness of industry expectations expands significantly, demonstrating that perceived skill gaps reflect conscious competence rather than lack of ambition."
-        )
+                col_a3, col_a4 = st.columns(2, gap="medium")
+                with col_a3:
+                    st.markdown("#### Key Factors Influencing Career Choices")
+                    factors_df = count_multiselect(dff["career_choice_factors"]).head(6)
+                    st.bar_chart(factors_df.set_index("Item"), color="#00CC88", height=280)
+                with col_a4:
+                    st.markdown("#### Information-Seeking Frequency")
+                    freq_counts = dff["career_info_frequency"].value_counts().reset_index(names=["Frequency", "Respondents"])
+                    st.dataframe(freq_counts, use_container_width=True, hide_index=True)
+
+            # --- TAB 2: SKILLS & COMPETENCY GAPS ---
+            with tab_skl:
+                st.subheader("Competency Inventory vs Reported Gaps")
+                col_s1, col_s2 = st.columns(2, gap="medium")
+                with col_s1:
+                    st.markdown("#### Top Possessed Skills (Self-Declared)")
+                    skills_df = count_multiselect(dff["current_skills"]).head(8)
+                    st.bar_chart(skills_df.set_index("Item"), color="#2ECC71", height=320)
+                with col_s2:
+                    st.markdown("#### Top Prioritized Skill Gaps (Areas to Improve)")
+                    gaps_df = count_multiselect(dff["skills_to_improve"]).head(8)
+                    st.bar_chart(gaps_df.set_index("Item"), color="#E74C3C", height=320)
+
+                st.markdown("---")
+                col_s3, col_s4 = st.columns([1, 1], gap="medium")
+                with col_s3:
+                    st.markdown("#### Overall Self-Assessed Skill Level (1–5)")
+                    skill_lvl_counts = dff["overall_skill_level"].value_counts().sort_index().reset_index(names=["Skill Level (1-5)", "Respondents"])
+                    st.bar_chart(skill_lvl_counts.set_index("Skill Level (1-5)"), color="#F39C12", height=280)
+                with col_s4:
+                    st.markdown("#### Empirical Pattern: Skill Count vs Challenges")
+                    pattern_data = dff.groupby("current_skills_count")["challenges_count"].mean().reset_index(names=["Declared Skills", "Avg Challenges Reported"])
+                    st.line_chart(pattern_data.set_index("Declared Skills"), color="#9B59B6", height=280)
+                    st.caption("📌 **Observed Pattern:** Students reporting a higher number of technical skills actively identify more operational hurdles (reflecting heightened situational awareness of professional expectations).")
+
+            # --- TAB 3: CHALLENGES & SUPPORT REQUIREMENTS ---
+            with tab_chl:
+                st.subheader("Operational Obstacles & Institutional Support Needs")
+                col_c1, col_c2 = st.columns(2, gap="medium")
+                with col_c1:
+                    st.markdown("#### Primary Career Hurdles Reported")
+                    chal_df = count_multiselect(dff["skill_challenges"]).head(6)
+                    st.bar_chart(chal_df.set_index("Item"), color="#E67E22", height=300)
+                with col_c2:
+                    st.markdown("#### Institutional Support Types Requested")
+                    supp_df_all = count_multiselect(dff["support_required"]).head(6)
+                    st.bar_chart(supp_df_all.set_index("Item"), color="#3498DB", height=300)
+
+                col_c3, col_c4 = st.columns(2, gap="medium")
+                with col_c3:
+                    st.markdown("#### Institutional Guidance Usefulness Rating (1–5)")
+                    guide_avg = dff["guidance_usefulness_rating"].mean()
+                    st.metric("Mean Guidance Satisfaction", f"{guide_avg:.2f} / 5.0", help="Self-assessed institutional guidance effectiveness")
+                    guide_counts = dff["guidance_usefulness_rating"].round().value_counts().sort_index().reset_index(names=["Rating (1-5)", "Count"])
+                    st.dataframe(guide_counts, use_container_width=True, hide_index=True)
+                with col_c4:
+                    st.markdown("#### Formal Training / Internship Participation")
+                    train_counts = dff["participated_training_or_internship"].value_counts().reset_index(names=["Participated?", "Count"])
+                    st.dataframe(train_counts, use_container_width=True, hide_index=True)
+                    yes_pct = ((dff["participated_training_or_internship"] == "Yes").mean()) * 100
+                    st.info(f"**{yes_pct:.1f}%** of youth in the selected cohort have completed formal training or internship programs.")
+
+            # --- TAB 4: READINESS & EXPLORATORY PERSONAS ---
+            with tab_per:
+                st.subheader("Model Readiness Scores & Exploratory Youth Personas")
+                col_p1, col_p2 = st.columns([1, 1], gap="medium")
+                with col_p1:
+                    st.markdown("#### Readiness Score Distribution (Phase 5 Model)")
+                    mean_score = dff["readiness_score"].mean()
+                    med_score = dff["readiness_score"].median()
+                    st.metric("Mean Readiness Score", f"{mean_score:.1f}%", delta=f"Median: {med_score:.1f}%")
+                    
+                    tier_dist = dff["readiness_tier"].value_counts().reset_index(names=["Readiness Tier", "Count"])
+                    st.dataframe(tier_dist, use_container_width=True, hide_index=True)
+
+                with col_p2:
+                    st.markdown("#### Mean Readiness by Career Track")
+                    track_scores = dff.groupby("career_field_interest")["readiness_score"].mean().round(1).reset_index(names=["Career Track", "Avg Readiness (%)"])
+                    st.bar_chart(track_scores.set_index("Career Track"), color="#16A085", height=280)
+
+                st.markdown("---")
+                st.markdown("#### 🤖 Exploratory ML Youth Personas (K-Means Clusters)")
+                st.caption("Identified during exploratory modeling to inform targeted community interventions:")
+                
+                per_col1, per_col2, per_col3 = st.columns(3)
+                with per_col1:
+                    st.info(
+                        "**Persona A (42.1%)**\n\n"
+                        "*Actively Skilled but Barrier-Constrained*\n\n"
+                        "- **Profile:** High confidence (4.5/5), possesses core skills, faces guidance and practical project hurdles.\n\n"
+                        "- **Recommended Support:** Industry mentorship & project incubation."
+                    )
+                with per_col2:
+                    st.success(
+                        "**Persona B (31.6%)**\n\n"
+                        "*High-Confidence Generalists*\n\n"
+                        "- **Profile:** Moderate-high readiness (50.2%), broad skill coverage, needs specialized technical depth.\n\n"
+                        "- **Recommended Support:** Advanced domain certifications & deep-dives."
+                    )
+                with per_col3:
+                    st.warning(
+                        "**Persona C (26.3%)**\n\n"
+                        "*Early-Stage Explorers*\n\n"
+                        "- **Profile:** Developing confidence (1.3/5), emerging skill awareness, requires foundational support.\n\n"
+                        "- **Recommended Support:** Career clarity workshops & foundational digital bootcamps."
+                    )
     else:
         st.warning("Survey dataset not found in data/ directory.")
 
