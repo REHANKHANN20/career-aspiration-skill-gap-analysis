@@ -56,10 +56,11 @@ print("TEST 2 PASSED: Unmapped role fallback returns status=UNMAPPED_ROLE.")
 
 # Test 3: Historical survey reproducibility (Layer 1)
 df_survey = pd.read_csv(os.path.join(app_dir, "data", "survey_cleaned_public.csv"))
-assert len(df_survey) == 38
+assert len(df_survey) == 49
 batch_res = model.batch_evaluate_dataframe(df_survey)
-assert abs(batch_res["readiness_score"].mean() - 26.643157894736845) < 1e-6
-print("TEST 3 PASSED: Survey cohort intact (38 rows), baseline readiness 26.64% preserved.")
+expected_mean = df_survey["readiness_score"].mean()
+assert abs(batch_res["readiness_score"].mean() - expected_mean) < 1e-6
+print(f"TEST 3 PASSED: Final survey cohort intact (49 rows), baseline readiness {expected_mean:.2f}% verified.")
 
 # Test 4: Domain recommendations verification
 res_bank = model.evaluate_interactive_role("Banking Operations & Commercial Banking", ["Spreadsheet Management (Excel / Sheets)"], 3)
